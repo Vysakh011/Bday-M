@@ -707,10 +707,7 @@
   hint.textContent = '';
   hint.classList.add('hidden');
 
-  // Auto-open shortly after the page loads
-  setTimeout(openCard, 900);
-
-  // Still allow tapping the card to close/reopen it
+  // Card only opens when clicked/tapped
   card.addEventListener('click', function(){
     if (isOpen) closeCard(); else openCard();
   });
