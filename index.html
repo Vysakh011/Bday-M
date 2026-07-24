@@ -29,6 +29,7 @@
   *{box-sizing:border-box;}
   html,body{
     margin:0; padding:0; width:100%; height:100%;
+    height:100dvh;
     overflow:hidden;
     background:
       radial-gradient(ellipse at 50% 20%, var(--backdrop-2), var(--backdrop-1) 70%);
@@ -38,7 +39,7 @@
 
   #stage{
     position:relative;
-    width:100vw; height:100vh;
+    width:100vw; height:100vh; height:100dvh;
     display:flex; align-items:center; justify-content:center;
     perspective:2400px;
   }
@@ -292,7 +293,9 @@
      PHOTO GALLERY
      ========================================================= */
   #gallery-btn{
-    position:absolute; bottom:6%; left:50%; transform:translateX(-50%);
+    position:fixed;
+    bottom:calc(3vh + env(safe-area-inset-bottom, 0px));
+    left:50%; transform:translateX(-50%);
     z-index:8;
     font-family:var(--font-label);
     letter-spacing:.18em; font-size:.68rem; text-transform:uppercase;
@@ -301,14 +304,17 @@
     border:none; border-radius:999px;
     padding:.85em 1.6em;
     cursor:pointer;
+    white-space:nowrap;
     box-shadow:0 8px 20px -6px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.5);
     opacity:0; pointer-events:none;
-    transform:translateX(-50%) translateY(14px);
     transition:opacity .6s ease, transform .6s ease;
   }
   #gallery-btn.visible{
     opacity:1; pointer-events:auto;
     transform:translateX(-50%) translateY(0);
+  }
+  #gallery-btn:not(.visible){
+    transform:translateX(-50%) translateY(14px);
   }
   #gallery-btn:hover{ filter:brightness(1.06); }
 
@@ -395,7 +401,7 @@
      RESPONSIVE
      ========================================================= */
   @media (max-width:560px){
-    .card{ width:min(82vw, 61vh); }
+    .card{ width:min(82vw, 54vh); }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -422,7 +428,7 @@
             <div class="candle" style="left:50%;"><div class="flame" style="animation-delay:-.6s;"></div></div>
             <div class="candle" style="left:62%;"><div class="flame" style="animation-delay:-.9s;"></div></div>
           </div>
-          <div class="headline">Happy Birthday<br>Ponaaaa ❤️</div>
+          <div class="headline">Happy Birthday<br>Sonechiii ❤️</div>
           <p class="message" id="messageText">Another year of your beautiful heart lighting up every room you walk into. I hope today wraps you in every bit of the love, laughter, and softness you give so freely to everyone around you. Here's to you, today and always.</p>
           <div class="signoff">With all the love</div>
         </div>
@@ -432,7 +438,7 @@
       </div>
     </div>
 
-    <p id="hint">  </p>
+    <p id="hint"> </p>
 
     <button id="gallery-btn" type="button">View Our Memories</button>
 
@@ -693,7 +699,7 @@
       card.classList.remove('open');
       galleryBtn.classList.remove('visible');
       closeGallery();
-      setHint('   ');
+      setHint(' ');
     }
   }
 
